@@ -29,7 +29,7 @@ public class PostController {
     }
 
     // 게시글 수정 API
-    @PutMapping("/post/{}")
+    @PutMapping("/post/{id}")
     public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
         return postService.updatePost(id, requestDto);
     }

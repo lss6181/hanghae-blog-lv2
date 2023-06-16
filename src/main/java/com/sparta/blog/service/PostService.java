@@ -37,15 +37,18 @@ public class PostService {
     }
 
     // 게시글 수정 PUT 요청 수행 메서드
+    @Transactional
     public Long updatePost(Long id, PostRequestDto requestDto) {
         // 해당 메모 DB에서 조회 및 매칭
         Post post = findPost(id);
 
         // 수정요청 들어온 값 중 password가 불일치 시 수정 불가능
-        if (requestDto.getPassword() != post.getPassword()) {
-            new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
-        } else {
+        if (requestDto.getPassword().equals(post.getPassword())) {
             post.update(requestDto);
+            System.out.println("수정 성공 확인 메세지");
+        } else {
+            System.out.println("비밀번호가 일치하지 않습니다."); // 불일치시 반환을 어떻게 해줘야할지 모르겠어서 우선 null을 리턴해주는걸로 했습니다.
+            return null;
         }
 
         return id;
