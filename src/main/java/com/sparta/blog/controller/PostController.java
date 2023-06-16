@@ -24,15 +24,20 @@ public class PostController {
 
     // 전체 게시글 목록 조회 API
     @GetMapping("/posts")
-    public List<PostResponseDto> getPosts(){
+    public List<PostResponseDto> getPosts() {
         return postService.getPosts();
     }
 
     // 게시글 수정 API
     @PutMapping("/post/{id}")
-    public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto){
+    public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
         return postService.updatePost(id, requestDto);
     }
 
+    // 게시글 삭제 API
+    @DeleteMapping("/post/{id}")
+    public Long deletePost(@PathVariable Long id) {
+        return postService.deletePost(id);
+    }
 
 }
