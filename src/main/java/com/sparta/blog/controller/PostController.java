@@ -36,8 +36,8 @@ public class PostController {
 
     // 게시글 삭제 API
     @DeleteMapping("/post/{id}")
-    public Long deletePost(@PathVariable Long id) {
-        return postService.deletePost(id);
+    public Long deletePost(@PathVariable Long id, @RequestParam String password) {
+        return postService.deletePost(id, password);
     }
 
 }

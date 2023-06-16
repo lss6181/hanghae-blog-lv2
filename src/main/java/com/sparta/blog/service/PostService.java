@@ -44,12 +44,12 @@ public class PostService {
         // 해당 메모 DB에서 조회 및 매칭
         Post post = findPost(id);
 
-        // 수정요청 들어온 값 중 password가 불일치 시 수정 불가능
+        // 수정요청 들어온 값 중 password가 일치 할 시 수정적용
         if (requestDto.getPassword().equals(post.getPassword())) {
             post.update(requestDto);
             System.out.println("수정 성공 확인 메세지");
         } else {
-            // 불일치시 반환을 어떻게 해줘야할지 모르겠어서 우선 null을 리턴해주는걸로 했다.
+            // 비밀번호 불일치시 반환을 어떻게 해줘야할지 모르겠어서 우선 null을 리턴해주는걸로 했다.
             System.out.println("비밀번호가 일치하지 않습니다.");
             return null;
         }
@@ -57,11 +57,19 @@ public class PostService {
     }
 
     // 게시글 삭제 DELETE 요청 수행 메서드
-    public Long deletePost(Long id) {
+    public Long deletePost(Long id, String password) {
         Post post = findPost(id);
 
-        postRepository.delete(post);
 
+        // 받아온 password와 db에서 찾은 게시글의 password 일치여부 확인
+        if (password.equals(post.getPassword())) {
+            postRepository.delete(post);
+            System.out.println("삭제 성공 확인 메세지");
+        } else {
+            // 비밀번호 불일치시 반환을 어떻게 해줘야할지 모르겠어서 우선 null을 리턴해주는걸로 했다.
+            System.out.println("비밀번호가 일치하지 않습니다.");
+            return null;
+        }
         return id;
     }
 
