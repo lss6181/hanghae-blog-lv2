@@ -28,14 +28,20 @@ public class PostController {
         return postService.getPosts();
     }
 
+    // 선택된 게시글 조회 API
+    @GetMapping("/posts/{id}")
+    public List<PostResponseDto> getPickedPosts(@PathVariable Long id){
+        return postService.getPickedPosts(id);
+    }
+
     // 게시글 수정 API
-    @PutMapping("/post/{id}")
+    @PutMapping("/posts/{id}")
     public Long updatePost(@PathVariable Long id, @RequestBody PostRequestDto requestDto) {
         return postService.updatePost(id, requestDto);
     }
 
     // 게시글 삭제 API
-    @DeleteMapping("/post/{id}")
+    @DeleteMapping("/posts/{id}")
     public Long deletePost(@PathVariable Long id, @RequestParam String password) {
         return postService.deletePost(id, password);
     }

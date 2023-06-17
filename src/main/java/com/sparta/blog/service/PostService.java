@@ -8,7 +8,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
-
 @Service
 public class PostService {
     private final PostRepository postRepository;
@@ -38,6 +37,11 @@ public class PostService {
         return postRepository.findAllByOrderByModifiedAtDesc().stream().map(PostResponseDto::new).toList();
     }
 
+    // 선택된 게시글 조회 GET 요청 수행 메서드
+    public List<PostResponseDto> getPickedPosts(Long id) {
+        return postRepository.findById(id).stream().map(PostResponseDto::new).toList();
+    }
+
     // 게시글 수정 PUT 요청 수행 메서드
     @Transactional
     public Long updatePost(Long id, PostRequestDto requestDto) {
@@ -60,7 +64,6 @@ public class PostService {
     public Long deletePost(Long id, String password) {
         Post post = findPost(id);
 
-
         // 받아온 password와 db에서 찾은 게시글의 password 일치여부 확인
         if (password.equals(post.getPassword())) {
             postRepository.delete(post);
@@ -72,8 +75,6 @@ public class PostService {
         }
         return id;
     }
-
-
 
     // DB에서 id값으로 조회하여 매칭 해주는 메서드
     private Post findPost(Long id) {
