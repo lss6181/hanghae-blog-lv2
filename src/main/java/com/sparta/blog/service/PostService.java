@@ -38,7 +38,7 @@ public class PostService {
     }
 
     // 선택된 게시글 조회 GET 요청 수행 메서드
-    public List<PostResponseDto> getPickedPosts(Long id) {
+    public List<PostResponseDto> getPostsBySelected(Long id) {
         return postRepository.findById(id).stream().map(PostResponseDto::new).toList();
     }
 

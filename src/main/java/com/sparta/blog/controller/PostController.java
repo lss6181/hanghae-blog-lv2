@@ -30,8 +30,8 @@ public class PostController {
 
     // 선택된 게시글 조회 API
     @GetMapping("/posts/{id}")
-    public List<PostResponseDto> getPickedPosts(@PathVariable Long id){
-        return postService.getPickedPosts(id);
+    public List<PostResponseDto> getPostsBySelected(@PathVariable Long id){
+        return postService.getPostsBySelected(id);
     }
 
     // 게시글 수정 API
