@@ -17,7 +17,7 @@ public class PostController {
     }
 
     // 게시글 작성 API
-    @PostMapping("/post")
+    @PostMapping("/posts")
     public PostResponseDto createPost(@RequestBody PostRequestDto requestDto) {
         return postService.createPost(requestDto);
     }
@@ -30,7 +30,7 @@ public class PostController {
 
     // 선택된 게시글 조회 API
     @GetMapping("/posts/{id}")
-    public List<PostResponseDto> getPostsBySelected(@PathVariable Long id){
+    public PostResponseDto getPostsBySelected(@PathVariable Long id){
         return postService.getPostsBySelected(id);
     }
 

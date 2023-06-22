@@ -33,13 +33,16 @@ public class PostService {
     // 전체 게시글 조회 GET 요청 수행 메서드
     // 전체 게시글 조회를 제목만 나오게 하고,
     // 제목을 선택하면 그 선택한 게시글의 내용이 나오게끔 변경을 해보고싶다.
+    // 리스트형태로 반환해주는 법 과제해설 16분
     public List<PostResponseDto> getPosts() {
         return postRepository.findAllByOrderByModifiedAtDesc().stream().map(PostResponseDto::new).toList();
     }
 
     // 선택된 게시글 조회 GET 요청 수행 메서드
-    public List<PostResponseDto> getPostsBySelected(Long id) {
-        return postRepository.findById(id).stream().map(PostResponseDto::new).toList();
+    public PostResponseDto getPostsBySelected(Long id) {
+        Post post = findPost(id);
+
+        return new PostResponseDto(post);
     }
 
     // 게시글 수정 PUT 요청 수행 메서드
