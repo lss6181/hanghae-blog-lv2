@@ -41,7 +41,6 @@ public class UserController {
         return "회원가입 성공";
     }
 
-
     // 회원 관련 정보 받기
     @GetMapping("/user-info")
     @ResponseBody
